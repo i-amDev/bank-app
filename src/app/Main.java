@@ -6,7 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Welcome to Console Bank");
-        System.out.println("""
+        boolean running = true;
+        while (running) {
+            System.out.println("""
                 1) Open Account
                 2) Deposit
                 3) Withdraw
@@ -16,9 +18,14 @@ public class Main {
                 7) Search Accounts by Customer Name
                 0) Exit
                 """);
-        System.out.print("CHOOSE : ");
-        Scanner scanner = new Scanner(System.in);
-        String choice = scanner.nextLine().trim();
-        System.out.println("CHOICE : " + choice);
+            System.out.print("CHOOSE : ");
+            Scanner scanner = new Scanner(System.in);
+            String choice = scanner.nextLine().trim();
+            System.out.println("CHOICE : " + choice);
+
+            switch (choice) {
+                case "0" -> running = false;
+            }
+        }
     }
 }
