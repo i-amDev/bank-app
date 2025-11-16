@@ -4,7 +4,10 @@ import domain.Account;
 import repository.AccountRepository;
 import service.BankService;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class BankServiceImpl implements BankService {
 
@@ -24,6 +27,13 @@ public class BankServiceImpl implements BankService {
         accountRepository.save(account);
 
         return accountNumber;
+    }
+
+    @Override
+    public List<Account> listAccounts() {
+        return accountRepository.findAll().stream()
+                .sorted(Comparator.comparing(Account::getAccountNumber))
+                .collect(Collectors.toList());
     }
 
     private String getAccountNumber() {
