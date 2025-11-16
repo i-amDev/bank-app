@@ -50,7 +50,8 @@ public class Main {
         System.out.println("Initial deposit (optional, blank for 0) : ");
         String amount = scanner.nextLine().trim();
         Double initial = Double.valueOf(amount);
-        bankService.openAccount(name, email, type);
+        String accountNumber = bankService.openAccount(name, email, type);
+        System.out.println("Account opened : " + accountNumber);
     }
 
     private static void deposit(Scanner scanner) {
