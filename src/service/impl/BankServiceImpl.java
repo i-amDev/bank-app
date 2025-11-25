@@ -61,6 +61,13 @@ public class BankServiceImpl implements BankService {
         transactionRepository.add(transaction);
     }
 
+    @Override
+    public void transfer(String fromAccount, String toAccount, Double amount, String transfer) {
+        if (fromAccount.equals(toAccount)) {
+            throw new RuntimeException("Cannot transfer to your own account");
+        }
+    }
+
     private String getAccountNumber() {
         int size = accountRepository.findAll().size() + 1;
         return String.format("AC%06d", size);
