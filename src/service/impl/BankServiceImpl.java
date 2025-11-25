@@ -62,7 +62,7 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public void transfer(String fromAccount, String toAccount, Double amount, String transfer) {
+    public void transfer(String fromAccount, String toAccount, Double amount, String transferNote) {
         if (fromAccount.equals(toAccount)) {
             throw new RuntimeException("Cannot transfer to your own account");
         }
@@ -71,6 +71,9 @@ public class BankServiceImpl implements BankService {
         if (fromAcc.getBalance().compareTo(amount) < 0) {
             throw new RuntimeException("Insufficient Balance");
         }
+        fromAcc.setBalance(fromAcc.getBalance() - amount);
+        Transaction transaction = new Transaction(UUID.randomUUID().toString(), Type.WITHDRAW, fromAcc.getAccountNumber(), amount, LocalDateTime.now(), transferNote);
+        transactionRepository.add(transaction);
 
     }
 
