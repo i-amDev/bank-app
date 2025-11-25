@@ -66,6 +66,9 @@ public class BankServiceImpl implements BankService {
         if (fromAccount.equals(toAccount)) {
             throw new RuntimeException("Cannot transfer to your own account");
         }
+        Account fromAcc = accountRepository.findByAccountNumber(fromAccount).orElseThrow(() -> new RuntimeException("Account not found " + fromAccount));
+        Account toAcc = accountRepository.findByAccountNumber(toAccount).orElseThrow(() -> new RuntimeException("Account not found " + toAccount));
+
     }
 
     private String getAccountNumber() {
