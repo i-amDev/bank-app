@@ -2,10 +2,7 @@ package repository;
 
 import domain.Transaction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TransactionRepository {
 
@@ -13,5 +10,9 @@ public class TransactionRepository {
 
     public void add(Transaction transaction) {
         transactionByAccount.computeIfAbsent(transaction.getAccountNumber(), k -> new ArrayList<>()).add(transaction);
+    }
+
+    public List<Transaction> findByAccountNumber(String accountNumber) {
+        return new ArrayList<>(transactionByAccount.getOrDefault(accountNumber, Collections.emptyList()));
     }
 }
