@@ -71,9 +71,15 @@ public class BankServiceImpl implements BankService {
         if (fromAcc.getBalance().compareTo(amount) < 0) {
             throw new RuntimeException("Insufficient Balance");
         }
+
         fromAcc.setBalance(fromAcc.getBalance() - amount);
-        Transaction transaction = new Transaction(UUID.randomUUID().toString(), Type.WITHDRAW, fromAcc.getAccountNumber(), amount, LocalDateTime.now(), transferNote);
-        transactionRepository.add(transaction);
+        toAcc.setBalance(toAcc.getBalance() + amount);
+
+        Transaction fromTransaction = new Transaction(UUID.randomUUID().toString(), Type.TRANSFER_OUT, fromAcc.getAccountNumber(), amount, LocalDateTime.now(), transferNote);
+        transactionRepository.add(fromTransaction);
+
+        Transaction toTransaction = new Transaction(UUID.randomUUID().toString(), Type.TRANSFER_IN, toAcc.getAccountNumber(), amount, LocalDateTime.now(), transferNote);
+        transactionRepository.add(toTransaction);
 
     }
 
