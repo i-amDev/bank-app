@@ -88,6 +88,7 @@ public class Main {
     private static void statement(Scanner scanner, BankService bankService) {
         System.out.println("Account number : ");
         String accountNumber = scanner.nextLine().trim();
+        bankService.getStatement(accountNumber);
     }
 
     private static void listAccounts(Scanner scanner, BankService bankService) {
