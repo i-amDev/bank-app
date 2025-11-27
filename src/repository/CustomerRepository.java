@@ -15,4 +15,8 @@ public class CustomerRepository {
         return new ArrayList<>(customersById.values());
     }
 
+    public void save(Customer customer) {
+        customersById.put(customer.getId(), customer);
+    }
+
 }
