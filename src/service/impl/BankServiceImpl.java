@@ -1,6 +1,7 @@
 package service.impl;
 
 import domain.Account;
+import domain.Customer;
 import domain.Transaction;
 import domain.Type;
 import repository.AccountRepository;
@@ -23,6 +24,9 @@ public class BankServiceImpl implements BankService {
     @Override
     public String openAccount(String name, String email, String accountType) {
         String customerId = UUID.randomUUID().toString();
+
+        Customer customer = new Customer(customerId, name, email);
+        customerRepository.save(customer);
 
         // TODO Will change the logic for generating account number later.
 //        String accountNumber = UUID.randomUUID().toString();
