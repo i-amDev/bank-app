@@ -98,14 +98,14 @@ public class BankServiceImpl implements BankService {
     @Override
     public List<Account> searchAccountsByCustomerName(String q) {
         String query = q == null ? "" : q.toLowerCase();
-        List<Account> result = new ArrayList<>();
-        for (Customer customer : customerRepository.findAll()) {
-            if (customer.getName().toLowerCase().contains(query)) {
-                result.addAll(accountRepository.findByCustomerId(customer.getId()));
-            }
-        }
-        result.sort(Comparator.comparing(Account::getAccountNumber));
-        return result;
+
+        return customerRepository.findAll()
+                .stream()
+                .filter(customer -> customer.getName().toLowerCase().contains(query))
+                .flatMap(customer -> accountRepository.findByCustomerId(customer.getId())
+                        .stream())
+                        .sorted(Comparator.comparing(Account::getAccountNumber))
+                        .collect(Collectors.toList());
     }
 
     private String getAccountNumber() {
