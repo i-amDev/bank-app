@@ -1,7 +1,6 @@
 package service.impl;
 
 import domain.Account;
-import domain.Customer;
 import domain.Transaction;
 import domain.Type;
 import repository.AccountRepository;
@@ -10,7 +9,6 @@ import repository.TransactionRepository;
 import service.BankService;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
