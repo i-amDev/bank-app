@@ -58,7 +58,7 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public void withdraw(String accountNumber, Double amount, String withdrawalNote) {
-        Account account = accountRepository.findByAccountNumber(accountNumber).orElseThrow(() -> new RuntimeException("Account not found " + accountNumber));
+        Account account = accountRepository.findByAccountNumber(accountNumber).orElseThrow(() -> new AccountNotFoundException("Account not found " + accountNumber));
         if (account.getBalance().compareTo(amount) < 0) {
             throw new RuntimeException("Insufficient Balance");
         }
