@@ -6,6 +6,7 @@ import domain.Transaction;
 import domain.Type;
 import exceptions.AccountNotFoundException;
 import exceptions.InsufficientFundsException;
+import exceptions.ValidationException;
 import repository.AccountRepository;
 import repository.CustomerRepository;
 import repository.TransactionRepository;
@@ -72,7 +73,7 @@ public class BankServiceImpl implements BankService {
     @Override
     public void transfer(String fromAccount, String toAccount, Double amount, String transferNote) {
         if (fromAccount.equals(toAccount)) {
-            throw new RuntimeException("Cannot transfer to your own account");
+            throw new ValidationException("Cannot transfer to your own account");
         }
         Account fromAcc = accountRepository.findByAccountNumber(fromAccount).orElseThrow(() -> new AccountNotFoundException("Account not found " + fromAccount));
         Account toAcc = accountRepository.findByAccountNumber(toAccount).orElseThrow(() -> new AccountNotFoundException("Account not found " + toAccount));
