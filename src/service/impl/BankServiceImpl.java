@@ -5,6 +5,7 @@ import domain.Customer;
 import domain.Transaction;
 import domain.Type;
 import exceptions.AccountNotFoundException;
+import exceptions.InsufficientFundsException;
 import repository.AccountRepository;
 import repository.CustomerRepository;
 import repository.TransactionRepository;
@@ -60,7 +61,7 @@ public class BankServiceImpl implements BankService {
     public void withdraw(String accountNumber, Double amount, String withdrawalNote) {
         Account account = accountRepository.findByAccountNumber(accountNumber).orElseThrow(() -> new AccountNotFoundException("Account not found " + accountNumber));
         if (account.getBalance().compareTo(amount) < 0) {
-            throw new RuntimeException("Insufficient Balance");
+            throw new InsufficientFundsException("Insufficient Balance");
         }
 
         account.setBalance(account.getBalance() - amount);
