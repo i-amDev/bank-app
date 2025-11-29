@@ -36,6 +36,7 @@ public class BankServiceImpl implements BankService {
     @Override
     public String openAccount(String name, String email, String accountType) {
         validateName.validate(name);
+        validateEmail.validate(email);
 
         String customerId = UUID.randomUUID().toString();
 
