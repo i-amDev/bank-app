@@ -29,6 +29,10 @@ public class BankServiceImpl implements BankService {
         if (name == null || name.isBlank()) throw new ValidationException("Name is required");
     };
 
+    private final Validation<String> validateEmail = email -> {
+        if (email == null || !email.contains("@")) throw new ValidationException("Email is required");
+    };
+
     @Override
     public String openAccount(String name, String email, String accountType) {
         validateName.validate(name);
