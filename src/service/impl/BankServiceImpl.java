@@ -41,6 +41,7 @@ public class BankServiceImpl implements BankService {
     public String openAccount(String name, String email, String accountType) {
         validateName.validate(name);
         validateEmail.validate(email);
+        validateAccountType.validate(accountType);
 
         String customerId = UUID.randomUUID().toString();
 
