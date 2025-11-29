@@ -95,6 +95,7 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public void transfer(String fromAccount, String toAccount, Double amount, String transferNote) {
+        validateAmount.validate(amount);
         if (fromAccount.equals(toAccount)) {
             throw new ValidationException("Cannot transfer to your own account");
         }
