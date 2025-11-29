@@ -37,6 +37,10 @@ public class BankServiceImpl implements BankService {
         if (type == null || !(type.equalsIgnoreCase("SAVINGS") || type.equalsIgnoreCase("CURRENT"))) throw new ValidationException("Account type must be SAVINGS or CURRENT.");
     };
 
+    private final Validation<Double> validateAmount = amount -> {
+        if (amount == null || amount < 0) throw new ValidationException("Amount must be positive.");
+    };
+
     @Override
     public String openAccount(String name, String email, String accountType) {
         validateName.validate(name);
