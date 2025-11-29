@@ -33,6 +33,10 @@ public class BankServiceImpl implements BankService {
         if (email == null || !email.contains("@")) throw new ValidationException("Email is required");
     };
 
+    private final Validation<String> validateAccountType = type -> {
+        if (type == null || !(type.equalsIgnoreCase("SAVINGS") || type.equalsIgnoreCase("CURRENT"))) throw new ValidationException("Account type must be SAVINGS or CURRENT.");
+    };
+
     @Override
     public String openAccount(String name, String email, String accountType) {
         validateName.validate(name);
