@@ -3,8 +3,8 @@ package util;
 import exceptions.ValidationException;
 
 @FunctionalInterface
-public interface Validation<String> {
+public interface Validation<T> {
 
-    void validate(String value) throws ValidationException;
+    void validate(T value) throws ValidationException;
 
 }
