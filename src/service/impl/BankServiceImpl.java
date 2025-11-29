@@ -73,6 +73,7 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public void deposit(String accountNumber, Double amount, String depositNote) {
+        validateAmount.validate(amount);
         Account account = accountRepository.findByAccountNumber(accountNumber).orElseThrow(() -> new AccountNotFoundException("Account not found " + accountNumber));
         account.setBalance(account.getBalance() + amount);
         Transaction transaction = new Transaction(UUID.randomUUID().toString(), Type.DEPOSIT, account.getAccountNumber(), amount, LocalDateTime.now(), depositNote);
