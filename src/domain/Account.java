@@ -48,4 +48,5 @@ public class Account {
     public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
+
 }
