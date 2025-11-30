@@ -99,6 +99,7 @@ public class BankServiceImpl implements BankService {
 
         Account fromAcc = accountRepository.findByAccountNumber(fromAccount).orElseThrow(() -> new AccountNotFoundException("Account not found " + fromAccount));
         Account toAcc = accountRepository.findByAccountNumber(toAccount).orElseThrow(() -> new AccountNotFoundException("Account not found " + toAccount));
+
         if (fromAcc.getBalance().compareTo(amount) < 0) {
             throw new InsufficientFundsException("Insufficient Balance");
         }
