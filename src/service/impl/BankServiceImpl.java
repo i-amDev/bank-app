@@ -52,9 +52,6 @@ public class BankServiceImpl implements BankService {
         Customer customer = new Customer(customerId, name, email);
         customerRepository.save(customer);
 
-        // TODO Will change the logic for generating account number later.
-//        String accountNumber = UUID.randomUUID().toString();
-
         String accountNumber = getAccountNumber();
 
         Account account = new Account(accountType, (double) 0, customerId, accountNumber);
