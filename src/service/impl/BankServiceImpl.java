@@ -140,5 +140,4 @@ public class BankServiceImpl implements BankService {
         int size = accountRepository.findAll().size() + 1;
         return String.format("AC%06d", size);
     }
-
 }
